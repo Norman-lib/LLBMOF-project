@@ -10,10 +10,10 @@ def GoDec(video,r,k,epsilon,q):
     X_reshaped=video.reshape((f,x*y)).T
     m,n = X_reshaped.shape
     St=np.zeros(X_reshaped.shape)
-    Lt=np.zeros(X_reshaped.shape)
+    Lt=X_reshaped.copy()
     error_history = []
     t=0
-    while np.linalg.norm(X_reshaped-Lt-St)/np.linalg.norm(X_reshaped)>epsilon and t<20:
+    while np.linalg.norm(X_reshaped-Lt-St)/np.linalg.norm(X_reshaped)>epsilon :
         # if (t+1)%100==0:
         #     print("iteration hh",t, "Error ",error_history[-1] if len(error_history)>0 else "None")
         t += 1
