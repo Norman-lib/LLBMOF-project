@@ -30,11 +30,8 @@ def flow_algorithm(rho, N, omega_fr, omega_tilde, nbFrames):
                         # Vérifier que les indices restent dans les limites du tableau
                         if 0 <= new_x < rho.shape[1] and 0 <= new_y < rho.shape[2]:
                             f_s[i,new_x,new_y,t+1] = f_c  # Stream
-
-            
-                        
             for x in range(rho.shape[1]):
-                for y in range(rho.shape[2]): 
+                for y in range(rho.shape[2]):
                     rho_n[x,y,t+1] = 0
                     for i in range(q):                              
                         rho_n[x,y,t+1] += f_s[i,x,y,t+1] 
