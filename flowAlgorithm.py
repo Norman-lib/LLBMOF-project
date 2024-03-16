@@ -1,5 +1,6 @@
 import numpy as np
 
+
 q = 9  
 omega = np.array([4/9, 1/9, 1/9, 1/9, 1/9, 1/36, 1/36, 1/36, 1/36])  # Weights for velocity vectors
 epsilon = np.array([[0, 0], [1, 0], [0, 1], [-1, 0], [0, -1], [1, 1], [-1, 1], [-1, -1], [1, -1]])  # Velocity vectors
@@ -21,7 +22,17 @@ def flow_algorithm(rho, N, omega_fr, omega_tilde, nbFrames):
                     for i in range(q):
                         rho_xy_t = rho[t,x, y]
                         v_n_xy_t = velocity_field[t, x, y]
-                        f_eq = omega[i] * rho_xy_t * (1 + 3*np.dot(epsilon[i], v_n_xy_t + (9/2.0)*np.dot(epsilon[i], v_n_xy_t)**2-1.5*np.linalg.norm(v_n_xy_t)**2))  # Calculate equilibrium distribution
+                        a = np.dot(epsilon[i], v_n_xy_t)
+                        norm_v = np.linalg.norm(v_n_xy_t)**2
+                        sum_v_1 = a**2
+                        # except RuntimeWarning:
+                            # print(sum_v_1)
+                        sum_v_2 = 1.5*norm_v
+                        sum_v = v_n_xy_t + (9/2.0)*sum_v_1-sum_v_2
+                        f_eq =   1 + 3*np.dot(epsilon[i], sum_v )  # 
+                        f_eq = omega[i] * f_eq
+                        f_eq =  rho_xy_t * f_eq
+                        #Calculate equilibrium distribution
                         f_c = f_s[i,x,y,t] - omega_fr*(f_s[i,x,y,t]-f_eq) # Collision
 
                         new_x = x + epsilon[i][0]
