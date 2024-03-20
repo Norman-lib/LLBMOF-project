@@ -28,13 +28,14 @@ def flow_algorithm(rho, N, omega_fr, omega_tilde, nbFrames):
                         # except RuntimeWarning:
                             # print(sum_v_1)
                         sum_v_2 = 1.5*norm_v
-                        sum_v = v_n_xy_t + (9/2.0)*sum_v_1-sum_v_2
-                        f_eq =   1 + 3*np.dot(epsilon[i], sum_v )  # 
-                        f_eq = omega[i] * f_eq
-                        f_eq =  rho_xy_t * f_eq
+                        #sum_v = v_n_xy_t + (9/2.0)*sum_v_1-sum_v_2
+                        #f_eq =   1 + 3*np.dot(epsilon[i], sum_v )  # 
+                        #f_eq = omega[i] * f_eq
+                        #f_eq =  rho_xy_t * f_eq
+                        sum_v = 1+3*a + (9/2.0)*sum_v_1-sum_v_2
+                        f_eq = omega[i] * rho_xy_t * sum_v
                         #Calculate equilibrium distribution
                         f_c = f_s[i,x,y,t] - omega_fr*(f_s[i,x,y,t]-f_eq) # Collision
-
                         new_x = x + epsilon[i][0]
                         new_y = y + epsilon[i][1]
                 

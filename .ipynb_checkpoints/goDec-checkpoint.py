@@ -19,6 +19,7 @@ def godec(X, rank=1, card=None, iterated_power=1, max_iter=100, tol=0.001):
     L = X
     S = zeros(X.shape)
     LS = zeros(X.shape)
+    print("S.shape",S.shape)
     
     while True:
         # Update of L
@@ -52,6 +53,7 @@ def godec(X, rank=1, card=None, iterated_power=1, max_iter=100, tol=0.001):
             iter = iter + 1
     L = L.T.reshape(f,x,y)
     S = S.T.reshape(f,x,y)
+    print("S.shape",S.shape)
     return L, S, LS, RMSE
 
 # from scipy.linalg import qr, fractional_matrix_power
